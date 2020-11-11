@@ -122,7 +122,8 @@ namespace MyGame
 
         static void NewGame()
         {
-            Console.WriteLine("Тут однажды будет Новая Игра");
+            Console.WriteLine("Введите имя");
+            string Name = Console.ReadLine();
         }
 
         static void Continue()
