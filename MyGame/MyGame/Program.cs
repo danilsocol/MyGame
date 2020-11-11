@@ -20,11 +20,29 @@ namespace MyGame
             {
                 ConsoleKey Key = Console.ReadKey().Key;
 
-                Console.WriteLine(Key);
-
                 if(Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    switch (select) 
+                    {
+                        case 1:
+                            NewGame();
+                            break;
 
+                        case 2:
+                            Continue();
+                            break;
 
+                        case 3:
+                            Rating();
+                            break;
+
+                        case 4:
+                            Exit();
+                            break;
+                    }
+                    break;
+                }
                 if (select > 1)
                     if (Key == ConsoleKey.W || Key == ConsoleKey.UpArrow)
                         select -= 1;
@@ -60,24 +78,17 @@ namespace MyGame
 
             ReadFream(" Выход      ", select, counter);
             Console.WriteLine("");
-            counter++;
 
-        }
-        enum Optoins
-        {
         }
         static void ReadFream(string text, int select, int counter)
         {
             int numSpace = 50;
             if(text == "   FEELWORDS   ")
-            {
                 numSpace = 48;
-            }
 
             string line = "";
             for (int i = 0; i < text.Length; i++)
                 line += '═';
-
 
             CreateSpace(numSpace,  select,  counter);
             Fream('╔', line, '╗', numSpace);
@@ -107,6 +118,26 @@ namespace MyGame
 
             if (select == counter)
                 Console.BackgroundColor = ConsoleColor.Red;
+        }
+
+        static void NewGame()
+        {
+            Console.WriteLine("Тут однажды будет Новая Игра");
+        }
+
+        static void Continue()
+        {
+            Console.WriteLine("Тут однажды будет Продолжить");
+        }
+
+        static void Rating()
+        {
+            Console.WriteLine("Тут однажды будет Рейтинг");
+        }
+
+        static void Exit()
+        {
+            Console.WriteLine("Тут однажды будет Выход");
         }
     }
 }
