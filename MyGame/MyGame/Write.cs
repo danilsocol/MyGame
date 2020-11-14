@@ -40,16 +40,16 @@ namespace MyGame
                 line += '═';
 
             CreateSpace(numSpace, select, counter);
-            Fream('╔', line, '╗', numSpace);
+            Сell('╔', line, '╗', numSpace);
 
             CreateSpace(numSpace, select, counter);
-            Fream('║', text, '║', numSpace);
+            Сell('║', text, '║', numSpace);
 
             CreateSpace(numSpace, select, counter);
-            Fream('╚', line, '╝', numSpace);
+            Сell('╚', line, '╝', numSpace);
         }
 
-        public static void Fream(char oneChar, string text, char twoChar, int numSpace)
+        public static void Сell(char oneChar, string text, char twoChar, int numSpace)
         {
             Console.Write(oneChar);
             Console.Write(text);
