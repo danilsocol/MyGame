@@ -26,7 +26,7 @@ namespace MyGame
                     switch (select) 
                     {
                         case 1:
-                            NewGame();//будущие классы
+                            NewGame.Start();
                             break;
 
                         case 2:
@@ -55,14 +55,11 @@ namespace MyGame
                 Write.ReadMenu(select);
             }
         }
-
-       
-
-        static void NewGame()
-        {
-            Console.WriteLine("Введите имя");
-            string Name = Console.ReadLine();
-        }
+        //static void NewGame()
+        //{
+        //    Console.WriteLine("Введите имя");
+        //    string Name = Console.ReadLine();
+        //}
 
         static void Continue()
         {
