@@ -66,5 +66,11 @@ namespace MyGame
             if (select == counter)
                 Console.BackgroundColor = ConsoleColor.Red;
         }
+
+        public static string ReadName()
+        {
+            Console.WriteLine("Введите имя");
+            return Console.ReadLine();
+        }
     }
 }
