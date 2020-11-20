@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace MyGame
 {
@@ -9,24 +9,16 @@ namespace MyGame
     {
         public static string[] ReadFile()
         {
-            string name = Write.ReadName();
 
-            string text = File.ReadAllText("dictionary.txt");
+            var text = File.ReadLines("dictionary.txt");
 
-            string[] word = SplitWords(text);
+            string[] words = new string[text.Count()];
 
-            
+            for (int i = 0; i < words.Length; i++) words[i] = text.Skip(i).First().ToUpper();
+
+            return words;
+
         }
-
-        private static string[] SplitWords(string text)
-        {
-            return text.Split(",");
-        }
-
-        //private static void ChoiceOfWords(int numberOfWords)
-        //{
-        //    Random rnd = new Random();
-        //}
 
 
     }
