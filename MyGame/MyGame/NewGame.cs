@@ -7,7 +7,7 @@ namespace MyGame
 {
     class NewGame
     {
-        public static void Start()
+        public static string[] ReadFile()
         {
             string name = Write.ReadName();
 

@@ -26,7 +26,7 @@ namespace MyGame
                     switch (select) 
                     {
                         case 1:
-                            NewGame.Start();
+                            NewGame.ReadFile();
                             break;
 
                         case 2:
