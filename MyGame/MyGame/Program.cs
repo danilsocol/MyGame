@@ -1,5 +1,7 @@
 ﻿using System;
-using System.ComponentModel.Design;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace MyGame
 {
@@ -26,7 +28,8 @@ namespace MyGame
                     switch (select) 
                     {
                         case 1:
-                            NewGame.ReadFile();
+                            CreateUser();
+                            GameActions();
                             break;
 
                         case 2:
@@ -55,11 +58,23 @@ namespace MyGame
                 Write.ReadMenu(select);
             }
         }
-        //static void NewGame()
-        //{
-        //    Console.WriteLine("Введите имя");
-        //    string Name = Console.ReadLine();
-        //}
+        public static void CreateUser()
+        {
+            string User;
+            do
+            {
+                User = Write.ReadName();
+                Console.Clear();
+
+            } while (User.Length == 0);
+        }
+
+        public static void GameActions()
+        {
+            Field field = new Field();
+            field.CreateNewField(5, 5);
+            Write.WriteField(field);
+        }
 
         static void Continue()
         {
