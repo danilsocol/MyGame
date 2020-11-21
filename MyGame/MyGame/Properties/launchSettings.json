@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyGame": {
+      "commandName": "Project",
+      "workingDirectory": "E:\\Проекты\\Лабы\\MyGame\\MyGame\\File"
+    }
+  }
+}

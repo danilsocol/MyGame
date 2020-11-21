@@ -72,5 +72,45 @@ namespace MyGame
             Console.WriteLine("Введите имя");
             return Console.ReadLine();
         }
+
+        public static void WriteField(Field field)
+        {
+            DrawFieldLine("┌", "─", "┬", "┐", field.xSize);
+            Console.WriteLine();
+
+            for (int y = 0; y < field.ySize; y++)
+            {
+                Console.Write('│');
+                for (int x = 0; x < field.xSize; x++)
+                {
+                    Console.Write(" ");
+                    Console.Write(field.cellLetter[x, y]);
+                    Console.ResetColor();
+                    Console.Write(" " + "│");
+                }
+                Console.WriteLine();
+                DrawFieldLine("├", "─", "┼", "┤", field.xSize);
+                Console.WriteLine();
+            }
+
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            DrawFieldLine("└", "─", "┴", "┘", field.xSize);
+        }
+
+        static void DrawFieldLine(string sign1, string sign2, string sign3, string sign4, int num)
+        {
+            Console.Write(sign1 + sign2 + sign2 + sign2);
+            for (int i = 0; i < num - 1; i++) Console.Write(sign3 + sign2 + sign2 + sign2);
+            Console.Write(sign4);
+        }
+
+        static public void DrawFieldItem(int x, int y, dynamic color1, dynamic color2, Field field)
+        {
+            Console.SetCursorPosition(x * 4 + 2, y * 2 + 1);
+            Console.BackgroundColor = color1;
+            Console.ForegroundColor = color2;
+            Console.Write(field.cellLetter[x, y]);
+            Console.ResetColor();
+        }
     }
 }
