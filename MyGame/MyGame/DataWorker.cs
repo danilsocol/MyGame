@@ -7,7 +7,7 @@ namespace MyGame
 {
     class DataWorker
     {
-        public static List<List<string>> ReadFile()
+        public static string[] ReadFile()
         {
             var text = File.ReadLines("dictionary.txt");
 
@@ -15,7 +15,7 @@ namespace MyGame
 
             for (int i = 0; i < words.Length; i++) words[i] = text.Skip(i).First().ToUpper();
 
-            return ListWord(words);
+            return words;
         }
 
         public static List<List<string>> ListWord(string[] input)

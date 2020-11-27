@@ -75,11 +75,11 @@ namespace MyGame
             field.CreateNewField(5, 5);
 
             Write.WriteField(field);
-            Write.DrawFieldItem(0, 0, field);
+            Write.DrawFieldItem(0, 0, ConsoleColor.Black, field);
 
             
             bool enter = false;
-            int x = 0, y = 0;
+            int preX = 0, preY = 0, x = 0, y = 0;
 
             do
             {
@@ -87,20 +87,23 @@ namespace MyGame
 
                 if (key == ConsoleKey.Enter)
                 {
-                    enter = !enter;
-
-                    if (enter)
-                    {
-
-                    }
+                    Game.PlayerEnterAction(x,y,field, ref enter, DataWorker.ReadFile());
                 }
 
-                if (key == ConsoleKey.UpArrow  && y > 0) y--; 
-                if (key == ConsoleKey.DownArrow && y < 4 ) y++;
-                if (key == ConsoleKey.RightArrow && x < 4 ) x++;
-                if (key == ConsoleKey.LeftArrow  && x > 0) x--;
+                if (key == ConsoleKey.UpArrow  && preY > 0) y--; 
+                if (key == ConsoleKey.DownArrow && preY < 4 ) y++;
+                if (key == ConsoleKey.RightArrow && preX < 4 ) x++;
+                if (key == ConsoleKey.LeftArrow  && preX > 0) x--;
 
-                Write.DrawFieldItem(x, y, field);
+                if(preX != x || preY != y)
+                {
+                    preX = x;
+                    preY = y;
+
+                    Game.PlayerMoveAction(preX,preY,x, y, field, enter);
+                }
+
+                Write.DrawFieldItem(x, y, ConsoleColor.Black, field);
 
 
 

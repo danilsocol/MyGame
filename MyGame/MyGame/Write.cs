@@ -104,10 +104,19 @@ namespace MyGame
             Console.Write(char4);
         }
 
-        static public void DrawFieldItem(int x, int y, Field field)
+        static public void DrawFieldItem(int x, int y, dynamic color, Field field)
         {
             Console.SetCursorPosition(x * 4 + 2, y * 2 + 1);
+            Console.BackgroundColor = color;
             Console.Write(field.cellLetter[x, y]);
+            Console.ResetColor();
+        }
+
+        static public void DrawWord(string text, int xSize, int num)
+        {
+            Console.SetCursorPosition(xSize * 4 + 2, num + 1);
+            Console.Write(text);
         }
     }
+
 }
