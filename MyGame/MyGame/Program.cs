@@ -20,9 +20,9 @@ namespace MyGame
         {
             while (true)
             {
-                ConsoleKey Key = Console.ReadKey().Key;
+                ConsoleKey key = Console.ReadKey().Key;
 
-                if(Key == ConsoleKey.Enter)
+                if(key == ConsoleKey.Enter)
                 {
                     Console.Clear();
                     switch (select) 
@@ -47,11 +47,11 @@ namespace MyGame
                     break;
                 }
                 if (select > 1)
-                    if (Key == ConsoleKey.W || Key == ConsoleKey.UpArrow)
+                    if (key == ConsoleKey.W || key == ConsoleKey.UpArrow)
                         select -= 1;
 
                 if (select < 4)
-                    if (Key == ConsoleKey.S || Key == ConsoleKey.DownArrow)
+                    if (key == ConsoleKey.S || key == ConsoleKey.DownArrow)
                         select += 1;
 
                 Console.Clear();
@@ -73,7 +73,38 @@ namespace MyGame
         {
             Field field = new Field();
             field.CreateNewField(5, 5);
+
             Write.WriteField(field);
+            Write.DrawFieldItem(0, 0, field);
+
+            
+            bool enter = false;
+            int x = 0, y = 0;
+
+            do
+            {
+                ConsoleKey key = Console.ReadKey().Key;
+
+                if (key == ConsoleKey.Enter)
+                {
+                    enter = !enter;
+
+                    if (enter)
+                    {
+
+                    }
+                }
+
+                if (key == ConsoleKey.UpArrow  && y > 0) y--; 
+                if (key == ConsoleKey.DownArrow && y < 4 ) y++;
+                if (key == ConsoleKey.RightArrow && x < 4 ) x++;
+                if (key == ConsoleKey.LeftArrow  && x > 0) x--;
+
+                Write.DrawFieldItem(x, y, field);
+
+
+
+            } while (true);
         }
 
         static void Continue()

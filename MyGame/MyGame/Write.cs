@@ -108,7 +108,6 @@ namespace MyGame
         {
             Console.SetCursorPosition(x * 4 + 2, y * 2 + 1);
             Console.Write(field.cellLetter[x, y]);
-            Console.ResetColor();
         }
     }
 }
