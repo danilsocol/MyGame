@@ -46,7 +46,13 @@ namespace MyGame
                     x = rnd.Next(xSize) + 1;
                     y = rnd.Next(xSize) + 1;
                     attempts++;
-
+                    //
+                    if (attempts > 51)
+                    {
+                        Console.WriteLine("Жопа1");
+                        Console.ReadLine();
+                    }
+                    //
                 } while (!freeСell[x, y]&& !(attempts>50));
 
                 int direction = FineDirection(freeСell, x, y);
@@ -82,7 +88,15 @@ namespace MyGame
 
                         if (lenght == setWords.Count - 1 || (lenght >= 4 && rnd.Next(6) == 0))
                             break;
+                        //
+                        attempts++;
 
+                        if (attempts > 50)
+                        {
+                            Console.WriteLine("Жопа2");
+                            Console.ReadLine();
+                        }
+                        //
                     } while (true);
 
                     if (setWords[lenght].Count > 0)
@@ -98,6 +112,15 @@ namespace MyGame
                         wordPos.RemoveAt(wordPos.Count - 1);
                     }
                 }
+                //
+                attempts++;
+
+                if (attempts > 20)
+                {
+                    Console.WriteLine("Жопа3");
+                    Console.ReadLine();
+                }
+                //
 
             } while (cellNum > 1);
 
