@@ -106,7 +106,15 @@ namespace MyGame
                     Game.PlayerEnterAction(x, y, field, ref enter, DataWorker.ReadFile());
                 }
 
-                
+                if (key == ConsoleKey.Escape)
+                {
+                        Game.BrakeFilling(field ,x,y);
+
+                        Write.DrawWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize, Player.wordsList.Count);
+
+                        enter = false;
+                }
+
 
             } while (true);
         }
