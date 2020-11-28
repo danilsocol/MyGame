@@ -75,7 +75,7 @@ namespace MyGame
 
         public static void WriteField(Field field)
         {
-            DrawFieldLine("┌", "─", "┬", "┐", field.xSize);
+            WriteFieldLine("┌", "─", "┬", "┐", field.xSize);
             Console.WriteLine();
 
             for (int y = 0; y < field.ySize; y++)
@@ -89,22 +89,22 @@ namespace MyGame
                     Console.Write(" " + "│");
                 }
                 Console.WriteLine();
-                DrawFieldLine("├", "─", "┼", "┤", field.xSize);
+                WriteFieldLine("├", "─", "┼", "┤", field.xSize);
                 Console.WriteLine();
             }
 
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            DrawFieldLine("└", "─", "┴", "┘", field.xSize);
+            WriteFieldLine("└", "─", "┴", "┘", field.xSize);
         }
 
-        static void DrawFieldLine(string char1, string char2, string char3, string char4, int num)
+        static void WriteFieldLine(string char1, string char2, string char3, string char4, int num)
         {
             Console.Write(char1 + char2 + char2 + char2);
             for (int i = 0; i < num - 1; i++) Console.Write(char3 + char2 + char2 + char2);
             Console.Write(char4);
         }
 
-        static public void DrawFieldItem(int x, int y, dynamic color1, dynamic color2, Field field)
+        static public void WriteFieldChar(int x, int y, dynamic color1, dynamic color2, Field field)
         {
             Console.SetCursorPosition(x * 4 + 2, y * 2 + 1);
             Console.BackgroundColor = color1;
@@ -113,7 +113,7 @@ namespace MyGame
             Console.ResetColor();
         }
 
-        static public void DrawWord(string text, int xSize, int num)
+        static public void WriteWord(string text, int xSize, int num)
         {
             Console.SetCursorPosition(xSize * 4 + 2, num + 1);
             Console.Write(text);

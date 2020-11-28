@@ -72,24 +72,20 @@ namespace MyGame
         public static void GameActions()
         {
             Field field = new Field();
-            field.CreateNewField(5, 5);
+            field.CreateField(5, 5);
 
             Write.WriteField(field);
-            Write.DrawFieldItem(0, 0, ConsoleColor.Red, ConsoleColor.White, field);
+            Write.WriteFieldChar(0, 0, ConsoleColor.Red, ConsoleColor.White, field);
 
-            
             bool enter = false;
-            int preX = 0, preY = 0, x = 0, y = 0;
+            int preX, preY, x = 0, y = 0;
 
             do
             {
                 preX = x;
                 preY = y;
 
-
                 ConsoleKey key = Console.ReadKey().Key;
-
-                
 
                 if (key == ConsoleKey.UpArrow  && preY > 0) y--; 
                 if (key == ConsoleKey.DownArrow && preY < 4 ) y++;
@@ -98,21 +94,20 @@ namespace MyGame
 
                 if(preX != x || preY != y)
                 {
-                    Game.PlayerMoveAction(preX,preY,x, y, field, enter);
+                    Game.MoveAction(preX,preY,x, y, field, enter);
                 }
 
                 if (key == ConsoleKey.Enter)
                 {
-                    Game.PlayerEnterAction(x, y, field, ref enter, DataWorker.ReadFile());
+                    Game.EnterAction(x, y, field, ref enter, DataWorker.ReadFile());
                 }
 
                 if (key == ConsoleKey.Escape)
                 {
-                        Game.BrakeFilling(field ,x,y);
+                    Game.Stop(field, x, y);
+                    Write.WriteWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize, Player.wordsList.Count);
 
-                        Write.DrawWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize, Player.wordsList.Count);
-
-                        enter = false;
+                    enter = false;
                 }
 
 

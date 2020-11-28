@@ -15,7 +15,7 @@ namespace MyGame
         public char[,] cellLetter;
         public dynamic[,,] cellColor;
 
-        public void CreateNewField(int xXx,int yYy)
+        public void CreateField(int xXx,int yYy)
         {
             xSize = xXx;
             ySize = yYy;
@@ -24,12 +24,8 @@ namespace MyGame
             string[] words = DataWorker.ReadFile();
             List<List<string>> setWords = DataWorker.ListWord(words);
 
-            
-
             cellLetter = new char[xSize, ySize];
-
             char lettersList = '*';
-
 
             bool[,] freeСell = new bool[xSize + 2, ySize + 2];
             for (int x = 0; x <= xSize + 1; x++)
@@ -38,7 +34,6 @@ namespace MyGame
                     if (x == xSize + 1 || y == ySize + 1 || x == 0 || y == 0) freeСell[x, y] = false;
                     else freeСell[x, y] = true;
                 }
-
 
             int cellNum = xSize * ySize;
             do
@@ -96,8 +91,10 @@ namespace MyGame
                     if (setWords[lenght].Count > 0)
                     {
                         int randomNum = rnd.Next(setWords[lenght].Count);
+
                         wordsList.Add(setWords[lenght][randomNum]);
                         setWords[lenght].Remove(wordsList[wordsList.Count - 1]);
+
                         if (setWords.Count == lenght && setWords[lenght].Count == 0)
                             setWords.RemoveAt(setWords.Count - 1);
                     }
@@ -106,7 +103,6 @@ namespace MyGame
                         wordPos.RemoveAt(wordPos.Count - 1);
                     }
                 }
-               
 
             } while (cellNum > 1);
 
@@ -126,7 +122,6 @@ namespace MyGame
                 {
                     if (cellLetter[x, y] == '\0')
                         cellLetter[x, y] = lettersList;
-
 
                     cellColor[x, y, 0] = ConsoleColor.Black;
                     cellColor[x, y, 1] = ConsoleColor.White;
@@ -152,8 +147,5 @@ namespace MyGame
             return finalDirection;
 
         }
-
-
-
     }
 }
