@@ -8,18 +8,23 @@ namespace MyGame
     class Field
     {
         static Random rnd = new Random();
+
+        public List<string> wordsList = new List<string>();
+        public List<List<int>> wordPos = new List<List<int>>();
         public int xSize, ySize;
         public char[,] cellLetter;
+        public dynamic[,,] cellColor;
 
         public void CreateNewField(int xXx,int yYy)
         {
-             xSize = xXx;
-             ySize = yYy;
+            xSize = xXx;
+            ySize = yYy;
+            cellColor = new dynamic[xSize, ySize, 2];
 
-            List<List<string>> setWords = DataWorker.ReadFile();
+            string[] words = DataWorker.ReadFile();
+            List<List<string>> setWords = DataWorker.ListWord(words);
 
-            List<string> wordsList = new List<string>();
-            List<List<int>> wordPos = new List<List<int>>();
+            
 
             cellLetter = new char[xSize, ySize];
 
@@ -41,18 +46,14 @@ namespace MyGame
                 int x, y;
 
                 int attempts = 0;
+                
                 do
                 {
                     x = rnd.Next(xSize) + 1;
                     y = rnd.Next(xSize) + 1;
+                    
                     attempts++;
-                    //
-                    if (attempts > 51)
-                    {
-                        Console.WriteLine("Жопа1");
-                        Console.ReadLine();
-                    }
-                    //
+                    
                 } while (!freeСell[x, y]&& !(attempts>50));
 
                 int direction = FineDirection(freeСell, x, y);
@@ -60,6 +61,7 @@ namespace MyGame
                 if (direction == 0)
                 {
                     freeСell[x, y] = false;
+                    cellNum--;
                     continue;
                 }
                 else
@@ -88,15 +90,7 @@ namespace MyGame
 
                         if (lenght == setWords.Count - 1 || (lenght >= 4 && rnd.Next(6) == 0))
                             break;
-                        //
-                        attempts++;
-
-                        if (attempts > 50)
-                        {
-                            Console.WriteLine("Жопа2");
-                            Console.ReadLine();
-                        }
-                        //
+                        
                     } while (true);
 
                     if (setWords[lenght].Count > 0)
@@ -112,15 +106,7 @@ namespace MyGame
                         wordPos.RemoveAt(wordPos.Count - 1);
                     }
                 }
-                //
-                attempts++;
-
-                if (attempts > 20)
-                {
-                    Console.WriteLine("Жопа3");
-                    Console.ReadLine();
-                }
-                //
+               
 
             } while (cellNum > 1);
 
@@ -140,6 +126,10 @@ namespace MyGame
                 {
                     if (cellLetter[x, y] == '\0')
                         cellLetter[x, y] = lettersList;
+
+
+                    cellColor[x, y, 0] = ConsoleColor.Black;
+                    cellColor[x, y, 1] = ConsoleColor.White;
                 }
             }
         }
