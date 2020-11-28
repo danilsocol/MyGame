@@ -10,16 +10,20 @@ namespace MyGame
         {
             if (!isEnter)
             {
-                Write.DrawFieldItem(x,y, ConsoleColor.Black, field);
+                Write.DrawFieldItem(preX, preY, field.cellColor[preX, preY, 0],
+                                             field.cellColor[preX, preY, 1], field);
+                Write.DrawFieldItem(x, y, ConsoleColor.Red, ConsoleColor.White, field);
+
             }
             else
             {
-                Write.DrawFieldItem(preX, preY, ConsoleColor.Black, field);
-                Write.DrawFieldItem(x, y, ConsoleColor.Blue, field);
-                Player.wordNow  +=  field.cellLetter[x, y];
+                Write.DrawFieldItem(preX, preY, ConsoleColor.Gray, ConsoleColor.Black, field);
+                Write.DrawFieldItem(x, y, ConsoleColor.Red, ConsoleColor.White, field);
+                Player.wordNow += field.cellLetter[x, y];
                 Write.DrawWord(Player.wordNow, field.xSize, Player.wordsList.Count);
                 Player.coordStory.Add(new int[] { x, y });
             }
+
         }
 
         static public void PlayerEnterAction(int X, int Y,Field field, ref bool isEnter, string[] allWords)
@@ -30,7 +34,7 @@ namespace MyGame
 
                 if (field.cellColor[X, Y, 0] == ConsoleColor.Black)
                 {
-                    Write.DrawFieldItem(X, Y, ConsoleColor.Black, field);
+                    Write.DrawFieldItem(X, Y, ConsoleColor.Gray, ConsoleColor.Black, field);
                     Player.wordNow += field.cellLetter[X, Y];
                     Write.DrawWord(Player.wordNow, field.xSize, Player.wordsList.Count);
                     Player.coordStory.Add(new int[] { X, Y });
@@ -43,14 +47,13 @@ namespace MyGame
                 if (field.wordsList.Contains(Player.wordNow) &&
                     field.wordPos[field.wordsList.IndexOf(Player.wordNow)][Player.wordNow.Length - 1] % field.xSize == X)
                 {
-                    dynamic color = ConsoleColor.Blue;
                     for (int i = 0; i < Player.coordStory.Count; i++)
                     {
-                       int x = Player.coordStory[i][0];
-                       int y = Player.coordStory[i][1];
+                        int x = Player.coordStory[i][0];
+                        int y = Player.coordStory[i][1];
 
-                        field.cellColor[x, y, 0] = color[0];
-                        field.cellColor[x, y, 1] = color[1];
+                        field.cellColor[x, y, 0] = ConsoleColor.Blue;
+                        field.cellColor[x, y, 1] = ConsoleColor.Blue;
                     }
 
                     Player.wordsList.Add(Player.wordNow);
@@ -58,12 +61,13 @@ namespace MyGame
                 else
                 {
                     if (field.wordsList.Contains(Player.wordNow))
-                        Write.DrawWord("Попробуйте записать это слово наоборот или найти ещё одно такое же на поле", field.xSize, Player.wordsList.Count);
+                        Write.DrawWord("Попробуйте выделить это слово по-другому", field.xSize, Player.wordsList.Count);
+
+                    else if ((allWords as IList<string>).Contains(Player.wordNow))
+                        Write.DrawWord("Данное слово не загадано на этом уровне ):", field.xSize, Player.wordsList.Count);
+
                     else
-                    if ((allWords as IList<string>).Contains(Player.wordNow))
-                        Write.DrawWord("Это не одно из слов, которое вам нужно отгодать на этом поле ):", field.xSize, Player.wordsList.Count);
-                    else
-                        Write.DrawWord("Такого слова нет в словаре", field.xSize, Player.wordsList.Count);
+                        Write.DrawWord("Данного слова нет в словаре", field.xSize, Player.wordsList.Count);
                 }
 
                 BrakeFilling(field,X,Y);
@@ -79,9 +83,9 @@ namespace MyGame
                 int x = Player.coordStory[i][0];
                 int y = Player.coordStory[i][1];
 
-                Write.DrawFieldItem(x, y, ConsoleColor.Blue, field);
+                Write.DrawFieldItem(x, y, field.cellColor[x, y, 0], field.cellColor[x, y, 1], field);
             }
-            Write.DrawFieldItem(X, Y, ConsoleColor.Black, field);
+            Write.DrawFieldItem(X, Y, ConsoleColor.DarkGray, ConsoleColor.White, field);
 
             Player.wordNow = string.Empty;
             Player.coordStory.RemoveRange(0, Player.coordStory.Count);
