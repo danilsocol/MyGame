@@ -109,8 +109,6 @@ namespace MyGame
 
                     enter = false;
                 }
-
-
             } while (true);
         }
 

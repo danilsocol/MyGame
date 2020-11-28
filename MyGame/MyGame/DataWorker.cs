@@ -20,7 +20,6 @@ namespace MyGame
 
         public static List<List<string>> ListWord(string[] input)
         {
-            string[] allWords = input;
             List<List<string>> setWords = new List<List<string>>();
 
             for (int i = 0; i < input.Length; i++)

@@ -10,17 +10,19 @@ namespace MyGame
         {
             if (!isEnter)
             {
-                Write.WriteFieldChar(preX, preY, field.cellColor[preX, preY, 0],
-                                             field.cellColor[preX, preY, 1], field);
-                Write.WriteFieldChar(x, y, ConsoleColor.Red, ConsoleColor.White, field);
+                Write.WriteFieldChar(preX, preY, field.cellColor[preX, preY, 0], field.cellColor[preX, preY, 1], field);
 
+                Write.WriteFieldChar(x, y, ConsoleColor.Red, ConsoleColor.White, field);
             }
             else
             {
                 Write.WriteFieldChar(preX, preY, ConsoleColor.Gray, ConsoleColor.Black, field);
                 Write.WriteFieldChar(x, y, ConsoleColor.Red, ConsoleColor.White, field);
+
                 Player.nowWord += field.cellLetter[x, y];
+
                 Write.WriteWord(Player.nowWord, field.xSize, Player.wordsList.Count);
+
                 Player.coordStory.Add(new int[] { x, y });
             }
 
@@ -44,8 +46,7 @@ namespace MyGame
             }
             else
             {
-                if (field.wordsList.Contains(Player.nowWord) &&
-                    field.wordPos[field.wordsList.IndexOf(Player.nowWord)][Player.nowWord.Length - 1] % field.xSize == X)
+                if (field.wordsList.Contains(Player.nowWord) && field.wordPos[field.wordsList.IndexOf(Player.nowWord)][Player.nowWord.Length - 1] % field.xSize == X)
                 {
                     for (int i = 0; i < Player.coordStory.Count; i++)
                     {
