@@ -85,29 +85,63 @@ namespace MyGame
                 preX = x;
                 preY = y;
 
+                if (Player.wordsList.Count == field.wordsList.Count)
+                // if(true)
+                {
+
+                    Player.newScore += 400;
+                    Write.Wins();
+                    break;
+                }
+
                 ConsoleKey key = Console.ReadKey().Key;
+
 
                 if (key == ConsoleKey.UpArrow  && preY > 0) y--; 
                 if (key == ConsoleKey.DownArrow && preY < 4 ) y++;
                 if (key == ConsoleKey.RightArrow && preX < 4 ) x++;
                 if (key == ConsoleKey.LeftArrow  && preX > 0) x--;
 
-                if(preX != x || preY != y)
+                Console.SetCursorPosition(preX * 4 + 3, preY * 2 + 1);
+
+                if (preX != x || preY != y)
                 {
                     Game.MoveAction(preX,preY,x, y, field, enter);
                 }
 
                 if (key == ConsoleKey.Enter)
                 {
+                    
                     Game.EnterAction(x, y, field, ref enter, DataWorker.ReadFile());
                 }
 
                 if (key == ConsoleKey.Escape)
                 {
-                    Game.Stop(field, x, y);
-                    Write.WriteWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize, Player.wordsList.Count);
+                    if (enter)
+                    {
+                        Game.Stop(field, x, y);
+                        Write.WriteWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize);
 
-                    enter = false;
+                        enter = false;
+                    }
+                    else
+                    {
+                        Write.WriteWord("Вы уверены, что хотите выйти? (Прогресс будет потерян)", field.xSize);
+                        Console.WriteLine($"Кол-во ваших очков {Player.score}");
+                        key = Console.ReadKey().Key;
+
+                        if (key == ConsoleKey.Enter)
+                        {
+                            Console.Clear();
+                            break;
+                        }
+                        else
+                        {
+                            Write.WriteWord(" ", field.xSize+1);
+                            Console.SetCursorPosition(preX * 4 + 3, preY * 2 + 1);
+                        }
+                    }
+
                 }
             } while (true);
         }
@@ -119,12 +153,13 @@ namespace MyGame
 
         static void Rating()
         {
-            Console.WriteLine("Тут однажды будет Рейтинг");
+            Write.WriteRating();
         }
 
         static void Exit()
         {
-            Console.WriteLine("Тут однажды будет Выход");
+            Environment.Exit(0);
         }
+
     }
 }

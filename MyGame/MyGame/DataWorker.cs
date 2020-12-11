@@ -36,6 +36,17 @@ namespace MyGame
             }
             return setWords;
         }
+
+        public static string[] ReadOldNames()
+        {
+            return File.ReadAllLines("Names.txt");
+        }
+
+        public static string[] ReadOldScore()
+        {
+            return File.ReadAllLines("Score.txt");
+        }
+
     }
 }
 

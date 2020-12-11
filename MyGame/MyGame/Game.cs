@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
 namespace MyGame
 {
     class Game
@@ -21,7 +19,7 @@ namespace MyGame
 
                 Player.nowWord += field.cellLetter[x, y];
 
-                Write.WriteWord(Player.nowWord, field.xSize, Player.wordsList.Count);
+                Write.WriteWord(Player.nowWord, field.xSize);
 
                 Player.coordStory.Add(new int[] { x, y });
             }
@@ -32,13 +30,13 @@ namespace MyGame
         {
             if (!isEnter)
             {
-                Write.WriteWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize, Player.wordsList.Count);
+                Write.WriteWord(new string(' ', Console.WindowWidth - (field.xSize * 4 + 2)), field.xSize);
 
                 if (field.cellColor[X, Y, 0] == ConsoleColor.Black)
                 {
                     Write.WriteFieldChar(X, Y, ConsoleColor.Gray, ConsoleColor.Black, field);
                     Player.nowWord += field.cellLetter[X, Y];
-                    Write.WriteWord(Player.nowWord, field.xSize, Player.wordsList.Count);
+                    Write.WriteWord(Player.nowWord, field.xSize);
                     Player.coordStory.Add(new int[] { X, Y });
                 }
                 else
@@ -58,17 +56,21 @@ namespace MyGame
                     }
 
                     Player.wordsList.Add(Player.nowWord);
+
+                    Player.newScore += 100;
+                    Console.Clear();
+                    Write.WriteField(field);
                 }
                 else
                 {
                     if (field.wordsList.Contains(Player.nowWord))
-                        Write.WriteWord("Попробуйте выделить это слово по-другому", field.xSize, Player.wordsList.Count);
+                        Write.WriteWord("Попробуйте выделить это слово по-другому", field.xSize);
 
                     else if ((allWords as IList<string>).Contains(Player.nowWord))
-                        Write.WriteWord("Данное слово не загадано на этом уровне ):", field.xSize, Player.wordsList.Count);
+                        Write.WriteWord("Данное слово не загадано на этом уровне ):", field.xSize);
 
                     else
-                        Write.WriteWord("Данного слова нет в словаре", field.xSize, Player.wordsList.Count);
+                        Write.WriteWord("Данного слова нет в словаре", field.xSize);
                 }
 
                 Stop(field,X,Y);

@@ -124,7 +124,8 @@ namespace MyGame
                         cellLetter[x, y] = lettersList;
 
                     cellColor[x, y, 0] = ConsoleColor.Black;
-                    cellColor[x, y, 1] = ConsoleColor.White;
+                    cellColor[x, y, 1] = ConsoleColor.Gray;
+
                 }
             }
         }
