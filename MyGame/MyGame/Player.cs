@@ -12,14 +12,5 @@ namespace MyGame
         static public int score;
         static public int newScore;
         static public int indexPlayer;
-
-
-        static public void CreateNewPlayer()
-        {
-            coordStory.RemoveRange(0, coordStory.Count);
-            nowWord = string.Empty;
-            wordsList.RemoveRange(0, wordsList.Count);
-
-        }
     }
 }

@@ -28,6 +28,7 @@ namespace MyGame
             char lettersList = '*';
 
             bool[,] freeСell = new bool[xSize + 2, ySize + 2];
+
             for (int x = 0; x <= xSize + 1; x++)
                 for (int y = 0; y <= ySize + 1; y++)
                 {
@@ -48,7 +49,7 @@ namespace MyGame
                     y = rnd.Next(xSize) + 1;
                     
                     attempts++;
-                    
+
                 } while (!freeСell[x, y]&& !(attempts>50));
 
                 int direction = FineDirection(freeСell, x, y);
@@ -125,7 +126,6 @@ namespace MyGame
 
                     cellColor[x, y, 0] = ConsoleColor.Black;
                     cellColor[x, y, 1] = ConsoleColor.Gray;
-
                 }
             }
         }
@@ -146,7 +146,6 @@ namespace MyGame
             else finalDirection = 0;
 
             return finalDirection;
-
         }
     }
 }

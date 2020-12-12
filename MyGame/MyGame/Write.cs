@@ -70,14 +70,11 @@ namespace MyGame
 
         public static string ReadName()
         {
-            
             Console.WriteLine("Введите имя");
             string name = Console.ReadLine();
 
             string[] oldNames = DataWorker.ReadOldNames();
             string[] oldScore = DataWorker.ReadOldScore();
-            //for(int l =0; l< oldNames.Length; l++) { }
-
 
             int i = 0;
             do
@@ -88,62 +85,21 @@ namespace MyGame
                     Console.WriteLine("Будет создан новый персонаж");
                     Console.ReadLine();
 
-                    string[] newAndOldNames = new string[oldNames.Length + 1];
-                    string[] newAndOldScore = new string[oldScore.Length + 1];
-
-                    for (int j = 0; j < newAndOldNames.Length - 1; j++)
-                    {
-                        if (j + 2 == newAndOldNames.Length)
-                        {
-                            newAndOldNames[j] = name;
-                            newAndOldNames[j + 1] = "";
-
-                            newAndOldScore[j] = "0";
-                            newAndOldScore[j + 1] = "";
-                            j++;
-                        }
-                        else
-                        {
-                            newAndOldNames[j] = oldNames[j];
-                            newAndOldScore[j] = oldScore[j];
-                        }
-                    }
-
-                    StreamWriter str = new StreamWriter("Names.txt");
-                    for (int k = 0; k < newAndOldNames.Length; k++)
-                    {
-                        str.WriteLine(newAndOldNames[k]);
-                    }
-                    str.Close();
-
-                    StreamWriter scr = new StreamWriter("Score.txt");
-                    for (int k = 0; k < newAndOldScore.Length; k++)
-                    {
-                        scr.WriteLine(newAndOldScore[k]);
-                    }
-                    scr.Close();
-
-                    Player.score = 0;
+                    DataWorker.CreatePlayer(oldNames, oldScore,name);
                     break;
                 }
                 else if (name == oldNames[i])
                 {
-                    Player.score =Convert.ToInt32(oldScore[i]); //Старые очки
+                    Player.score =Convert.ToInt32(oldScore[i]); 
                     break;
                 }
-
                 i++;
 
             } while (true);
 
-
             Player.indexPlayer = i;
-
             return name;
         }
-
-        
-
         public static void WriteField(Field field)
         {
             WriteFieldLine("┌", "─", "┬", "┐", field.xSize);
@@ -201,21 +157,8 @@ namespace MyGame
             Console.Clear();
             Console.WriteLine("Вы победили!");
             Console.WriteLine($"Кол-во ваших очков {Player.score}");
-            Player.score = Player.score + Player.newScore;
-            Console.WriteLine($"Кол-во ваших очков после победы {Player.newScore}");
+            Console.WriteLine($"{Player.score} + {Player.newScore} = {Player.newScore + Player.score}");
             Console.ReadKey(true);
-
-
-            string[] oldScore = DataWorker.ReadOldScore(); // убрать в др метод
-
-            oldScore[Player.indexPlayer] = Convert.ToString(Player.score);
-
-            StreamWriter scr = new StreamWriter("Score.txt");
-            for (int k = 0; k < oldScore.Length; k++)
-            {
-                scr.WriteLine(oldScore[k]);
-            }
-            scr.Close();
         }
 
         static public void WriteRating()
@@ -225,40 +168,12 @@ namespace MyGame
             string[] names = DataWorker.ReadOldNames(); 
             string[] score = DataWorker.ReadOldScore();
 
-            string[] countScore = new string[score.Length];
+            int[] topTenIndex = DataWorker.FindTopTen(score);
 
-            for(int l=0;l< countScore.Length; l++)
-            {
-                countScore[l] = score[l];
-            }
-
-
-            int[] topTenIndex = new int[10];
-
-
-           // int max = Convert.ToInt32(score[0]);
-            topTenIndex[0] = 0;
-
-            for (int i = 0; i < 10; i++)
-            {
-                int max = -1;
-                for(int j = 0; j < countScore.Length-1; j++)
-                {
-                   if(max <= Convert.ToInt32(countScore[j]))
-                   {
-                        max = Convert.ToInt32(countScore[j]);
-                        topTenIndex[i] = j;
-                   }
-                }
-                countScore[topTenIndex[i]] = "-2";
-            }
-
-            for(int k = 0; k < 10; k++)
+            for (int k = 0; k < 10; k++)
             {
                 Console.WriteLine($"{names[topTenIndex[k]]}   {score[topTenIndex[k]]}");
             }
-
         }
     }
-
 }

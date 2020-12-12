@@ -40,7 +40,9 @@ namespace MyGame
                     Player.coordStory.Add(new int[] { X, Y });
                 }
                 else
+                {
                     isEnter = !isEnter;
+                }
             }
             else
             {
@@ -72,10 +74,8 @@ namespace MyGame
                     else
                         Write.WriteWord("Данного слова нет в словаре", field.xSize);
                 }
-
                 Stop(field,X,Y);
             }
-
             isEnter = !isEnter;
         }
 

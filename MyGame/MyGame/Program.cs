@@ -86,16 +86,15 @@ namespace MyGame
                 preY = y;
 
                 if (Player.wordsList.Count == field.wordsList.Count)
-                // if(true)
                 {
-
                     Player.newScore += 400;
                     Write.Wins();
+                    Player.score = Player.score + Player.newScore;
+                    DataWorker.Victory();
                     break;
                 }
 
                 ConsoleKey key = Console.ReadKey().Key;
-
 
                 if (key == ConsoleKey.UpArrow  && preY > 0) y--; 
                 if (key == ConsoleKey.DownArrow && preY < 4 ) y++;
@@ -111,7 +110,6 @@ namespace MyGame
 
                 if (key == ConsoleKey.Enter)
                 {
-                    
                     Game.EnterAction(x, y, field, ref enter, DataWorker.ReadFile());
                 }
 
@@ -141,7 +139,6 @@ namespace MyGame
                             Console.SetCursorPosition(preX * 4 + 3, preY * 2 + 1);
                         }
                     }
-
                 }
             } while (true);
         }
